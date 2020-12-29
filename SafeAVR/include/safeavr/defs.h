@@ -18,6 +18,9 @@ typedef unsigned int uint16_t;
 typedef signed long int int32_t;
 typedef unsigned long int uint32_t;
 
+#define true 1
+#define false 0
+
 /*
  * Bit manipulation and query helpers
  */
@@ -35,7 +38,7 @@ typedef unsigned long int uint32_t;
 
 /*
  * Panic function called in case of a non recoverable error.
- * Either define it in your project or include default_panic.h
+ * Either define it in your project or link with default_panic.c
  */
 void panic(void);
 

@@ -88,6 +88,7 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>../include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -124,13 +125,19 @@
     <Compile Include="include\safeavr.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\safeavr\default_panic.h">
+    <Compile Include="include\safeavr\assert.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\safeavr\defs.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\safeavr\gpio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\assert.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\gpio.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

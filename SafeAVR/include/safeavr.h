@@ -8,6 +8,10 @@
 #ifndef SAFEAVR_H_
 #define SAFEAVR_H_
 
-#include <safeavr/defs.h>
+#include "safeavr/defs.h"
+
+#ifdef SAFEAVR_GPIO_MODULE_ENABLED
+#include "safeavr/gpio.h"
+#endif
 
 #endif /* SAFEAVR_H_ */
