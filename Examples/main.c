@@ -12,6 +12,7 @@ void dummy_delay_one_second(void);
 
 int main(void)
 {
+    /* TODO: Report cppcheck misra addon false positive for designated initializer */
     struct gpio_init_config d9 = { .direction = OUTPUT, .pin = PIN1 };
 
     gpio_init(GPIOB, &d9);
@@ -37,8 +38,9 @@ void panic(void)
 {
     disable_interrupts();
 
-    while (true)
+    while (true) {
         ;
+    }
 }
 
 //#include <avr/io.h>
