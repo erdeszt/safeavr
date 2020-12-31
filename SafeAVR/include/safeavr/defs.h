@@ -5,8 +5,8 @@
  *  Author: erdeszt
  */
 
-#ifndef BITS_H_
-#define BITS_H_
+#ifndef DEFS_H_
+#define DEFS_H_
 
 /*
  * Standard integral types
@@ -18,8 +18,12 @@ typedef unsigned int uint16_t;
 typedef signed long int int32_t;
 typedef unsigned long int uint32_t;
 
-#define true 1
-#define false 0
+#define TRUE 1
+#define FALSE 0
+
+#define NUL ((void *)0)
+
+enum logic_level { LOW = 0, HIGH = 1 };
 
 /*
  * Bit manipulation and query helpers
@@ -38,8 +42,7 @@ typedef unsigned long int uint32_t;
 
 /*
  * Panic function called in case of a non recoverable error.
- * Either define it in your project or link with default_panic.c
  */
 void panic(void);
 
-#endif /* BITS_H_ */
+#endif /* DEFS_H_ */
