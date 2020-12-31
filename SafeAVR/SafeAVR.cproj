@@ -144,9 +144,6 @@
     <Compile Include="include\safeavr\usart.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\assert.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\gpio.c">
       <SubType>compile</SubType>
     </Compile>

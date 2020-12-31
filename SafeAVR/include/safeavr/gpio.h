@@ -51,6 +51,7 @@ struct gpio_init_config {
 
 /*
  * Definition of the GPIO ports B, C and D
+ *
  * Requirement:1.1.1
  */
 #define GPIOB_BASE_ADDRESS (SFR_OFFSET + 0x03)
@@ -76,6 +77,7 @@ extern struct gpio_definition *GPIOD;
 /*
  * Initialize one more GPIO pins to the selected mode.
  * GPIO pins have to be initialized before any read/write operations.
+ *
  * Requirement:1.1.1.1
  */
 void gpio_init(struct gpio_definition *, const struct gpio_init_config *);
@@ -83,6 +85,7 @@ void gpio_init(struct gpio_definition *, const struct gpio_init_config *);
 /*
  * Write the selected logic level to the specified GPIO pin.
  * The pin has to be initialized as output.
+ *
  * Requirement:1.1.1.2
  */
 void gpio_write(struct gpio_definition *, const uint8_t,
@@ -91,6 +94,7 @@ void gpio_write(struct gpio_definition *, const uint8_t,
 /* 
  * Sets the GPIO pin to high logic level.
  * The pin has to be initialized as output. 
+ *
  * Requirement:1.1.1.2
  */
 void gpio_set_high(struct gpio_definition *, const uint8_t);
@@ -98,6 +102,7 @@ void gpio_set_high(struct gpio_definition *, const uint8_t);
 /* 
  * Sets the GPIO pin to low logic level.
  * The pin has to be initialized as output. 
+ *
  * Requirement:1.1.1.2
  */
 void gpio_set_low(struct gpio_definition *, const uint8_t);
@@ -105,6 +110,7 @@ void gpio_set_low(struct gpio_definition *, const uint8_t);
 /*
  * Reads the logic level of the GPIO pin.
  * The pin has to be initialized as input.
+ *
  * Requirement:1.1.1.3
  */
 enum logic_level gpio_read(const struct gpio_definition *, const uint8_t);

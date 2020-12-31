@@ -27,7 +27,7 @@ static inline _Bool is_pin_mode_input(const struct gpio_definition *gpio,
 
 static inline _Bool is_valid_pin(const uint8_t pin)
 {
-    return pin && !(pin & (pin - 1));
+    return pin && !(pin & (pin - 1U));
 }
 
 void gpio_init(struct gpio_definition *gpio,
@@ -64,7 +64,7 @@ void gpio_set_high(struct gpio_definition *gpio, const uint8_t pin)
     assert(is_valid_pin(pin));
     assert(is_pin_mode_output(gpio, pin));
 
-    /* TODO: Finish */
+    SET_BIT(gpio->output_register, pin);
 }
 
 void gpio_set_low(struct gpio_definition *gpio, const uint8_t pin)
@@ -73,7 +73,7 @@ void gpio_set_low(struct gpio_definition *gpio, const uint8_t pin)
     assert(is_valid_pin(pin));
     assert(is_pin_mode_output(gpio, pin));
 
-    /* TODO: Finish */
+    CLEAR_BIT(gpio->output_register, pin);
 }
 
 enum logic_level gpio_read(const struct gpio_definition *gpio,
@@ -83,7 +83,5 @@ enum logic_level gpio_read(const struct gpio_definition *gpio,
     assert(is_valid_pin(pin));
     assert(is_pin_mode_input(gpio, pin));
 
-    /* TODO: Finish */
-
-    return LOW;
+    return IS_BIT_SET(gpio->input_register, pin);
 }

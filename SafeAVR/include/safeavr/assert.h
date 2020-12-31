@@ -10,18 +10,16 @@
 
 #include "safeavr/defs.h"
 
-#ifdef DEBUG
 /*
- * Aborts execution when the argument is false
+ * Aborts execution when the condition is false
  */
-inline void assert(const _Bool condition)
-{
-    if (!condition) {
-        panic();
+#ifdef DEBUG
+#define assert(condition)                                                      \
+    if (!(condition)) {                                                        \
+        panic();                                                               \
     }
-}
 #else
-#define assert(CONDITION)
+#define assert(condition)
 #endif /* DEBUG */
 
 #endif /* ASSERT_H_ */
