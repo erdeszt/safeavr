@@ -26,7 +26,6 @@ int main(void)
 
 void initialize(void)
 {
-    /* TODO: Report cppcheck misra addon false positive for designated initializer, try with latest version */
     struct gpio_init_config d9 = { .direction = OUTPUT, .pin = PIN1 };
 
     gpio_init(GPIOB, &d9);
