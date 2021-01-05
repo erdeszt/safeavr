@@ -2,3 +2,5 @@
 Debug
 *.dump
 *.pyc
+build
+__pycache__
