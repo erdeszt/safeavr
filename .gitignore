@@ -3,4 +3,5 @@ Debug
 *.dump
 *.pyc
 build
+test_build
 __pycache__

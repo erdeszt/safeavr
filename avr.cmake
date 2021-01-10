@@ -2,7 +2,8 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-set(C_WARNING_FLAGS "-Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -pedantic")
+include(Flags.cmake)
+
 set(C_GENERAL_FLAGS "-std=c99 -nostdinc -funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -fno-common")
 set(C_OPTIMIZATION_FLAGS "-Os")
 
@@ -72,34 +73,3 @@ function(add_avr_library LIBRARY_NAME)
     )
 
 endfunction(add_avr_library)
-
-function(avr_target_link_libraries EXECUTABLE_TARGET)
-
-    if(NOT ARGN)
-        message(FATAL_ERROR "Nothing to link to ${EXECUTABLE_TARGET}.")
-    endif(NOT ARGN)
-
-    get_target_property(TARGET_LIST ${EXECUTABLE_TARGET} OUTPUT_NAME)
-
-    foreach(TGT ${ARGN})
-        if(TARGET ${TGT})
-            get_target_property(ARG_NAME ${TGT} OUTPUT_NAME)
-            list(APPEND NON_TARGET_LIST ${ARG_NAME})
-        else()
-            list(APPEND NON_TARGET_LIST ${TGT})
-        endif()
-    endforeach()
-
-    target_link_libraries(${TARGET_LIST} ${NON_TARGET_LIST})
-endfunction(avr_target_link_libraries)
-
-function(avr_target_include_directories EXECUTABLE_TARGET)
-    if(NOT ARGN)
-        message(FATAL_ERROR "No include directories to add to ${EXECUTABLE_TARGET}.")
-    endif()
-
-    get_target_property(TARGET_LIST ${EXECUTABLE_TARGET} OUTPUT_NAME)
-    set(extra_args ${ARGN})
-
-    target_include_directories(${TARGET_LIST} ${extra_args})
-endfunction()

@@ -21,6 +21,20 @@ enum gpio_mode {
 };
 
 /*
+ * Definition of the individual pins within the GPIO ports
+ */
+enum gpio_pin {
+    PIN0 = 0,
+    PIN1 = 1,
+    PIN2 = 2,
+    PIN3 = 3,
+    PIN4 = 4,
+    PIN5 = 5,
+    PIN6 = 6,
+    PIN7 = 7,
+};
+
+/*
  * Memory mapping of GPIO ports.
  * Each port includes a direction register to configure pins as input or output,
  * an input register for reading the logic level of the pins and an output register
@@ -41,7 +55,7 @@ struct gpio_definition {
  */
 struct gpio_init_config {
     enum gpio_mode direction;
-    u8 pin;
+    enum gpio_pin pin;
 };
 
 /*
@@ -63,20 +77,6 @@ extern struct gpio_definition *GPIOC;
 extern struct gpio_definition *GPIOD;
 
 /*
- * Definition of the individual pins within the GPIO ports
- *
- * TODO: ENUM
- */
-#define PIN1 (1U << 0U)
-#define PIN2 (1U << 1U)
-#define PIN3 (1U << 2U)
-#define PIN4 (1U << 3U)
-#define PIN5 (1U << 4U)
-#define PIN6 (1U << 5U)
-#define PIN7 (1U << 6U)
-#define PIN8 (1U << 7U)
-
-/*
  * Initialize one more GPIO pins to the selected mode.
  * GPIO pins have to be initialized before any read/write operations.
  *
@@ -90,7 +90,7 @@ void gpio_init(struct gpio_definition *, const struct gpio_init_config *);
  *
  * Requirement:1.1.1.2
  */
-void gpio_write(struct gpio_definition *, const u8,
+void gpio_write(struct gpio_definition *, const enum gpio_pin,
                 const enum logic_level);
 
 /*
@@ -99,7 +99,7 @@ void gpio_write(struct gpio_definition *, const u8,
  *
  * Requirement:1.1.1.2
  */
-void gpio_set_high(struct gpio_definition *, const u8);
+void gpio_set_high(struct gpio_definition *, const enum gpio_pin);
 
 /*
  * Sets the GPIO pin to low logic level.
@@ -107,7 +107,7 @@ void gpio_set_high(struct gpio_definition *, const u8);
  *
  * Requirement:1.1.1.2
  */
-void gpio_set_low(struct gpio_definition *, const u8);
+void gpio_set_low(struct gpio_definition *, const enum gpio_pin);
 
 /*
  * Reads the logic level of the GPIO pin.
@@ -115,6 +115,6 @@ void gpio_set_low(struct gpio_definition *, const u8);
  *
  * Requirement:1.1.1.3
  */
-enum logic_level gpio_read(const struct gpio_definition *, const u8);
+enum logic_level gpio_read(const struct gpio_definition *, const enum gpio_pin);
 
 #endif /* GPIO_H_ */

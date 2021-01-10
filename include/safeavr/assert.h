@@ -3,16 +3,20 @@
 
 #include "defs.h"
 
+#if defined(DEBUG) && defined(NDEBUG)
+#error Both DEBUG and NDEBUG are defined!
+#endif
+
 /*
  * Aborts execution when the condition is false
  */
-#ifdef DEBUG
+#ifndef NDEBUG
 #define assert(condition)                                                      \
     if (!(condition)) {                                                        \
         panic();                                                               \
     }
 #else
 #define assert(condition)
-#endif /* DEBUG */
+#endif
 
 #endif /* ASSERT_H_ */

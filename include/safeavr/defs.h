@@ -21,13 +21,14 @@ enum logic_level { LOW = 0, HIGH = 1 };
 /*
  * Bit manipulation and query helpers
  */
-#define SET_BIT(REG, BIT) ((REG) |= (BIT))
-#define CLEAR_BIT(REG, BIT) ((REG) &= ~(BIT))
-#define READ_BIT(REG, BIT) ((REG) & (BIT))
-#define IS_BIT_SET(REG, BIT) (((REG) & (BIT)) == (BIT))
-#define IS_BIT_CLEAR(REG, BIT) (((REG) & (BIT)) == 0U)
+#define BIT_VALUE(BIT) (1u << (BIT))
+#define SET_BIT(REG, BIT) ((REG) |= (BIT_VALUE(BIT)))
+#define CLEAR_BIT(REG, BIT) ((REG) &= ~(BIT_VALUE(BIT)))
+#define READ_BIT(REG, BIT) ((REG) & (BIT_VALUE(BIT)))
+#define IS_BIT_SET(REG, BIT) (((REG) & (BIT_VALUE(BIT))) == (BIT_VALUE(BIT)))
+#define IS_BIT_CLEAR(REG, BIT) (((REG) & (BIT_VALUE(BIT))) == 0U)
 
-/* 
+/*
  * Interrupt helpers
  */
 #define enable_interrupts() __asm__ __volatile__("sei" ::: "memory")
