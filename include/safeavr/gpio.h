@@ -8,7 +8,7 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
-#include "safeavr/defs.h"
+#include "defs.h"
 
 /*
  * Definition of GPIO pin modes
@@ -29,9 +29,9 @@ enum gpio_mode {
  * Requirement:1.1.1
  */
 struct gpio_definition {
-    volatile uint8_t input_register;
-    volatile uint8_t direction_register;
-    volatile uint8_t output_register;
+    volatile u8 input_register;
+    volatile u8 direction_register;
+    volatile u8 output_register;
 };
 
 /*
@@ -41,7 +41,7 @@ struct gpio_definition {
  */
 struct gpio_init_config {
     enum gpio_mode direction;
-    uint8_t pin;
+    u8 pin;
 };
 
 /*
@@ -64,15 +64,17 @@ extern struct gpio_definition *GPIOD;
 
 /*
  * Definition of the individual pins within the GPIO ports
+ *
+ * TODO: ENUM
  */
-#define PIN1 (1U << 1U)
-#define PIN2 (1U << 2U)
-#define PIN3 (1U << 3U)
-#define PIN4 (1U << 4U)
-#define PIN5 (1U << 5U)
-#define PIN6 (1U << 6U)
-#define PIN7 (1U << 7U)
-#define PIN8 (1U << 8U)
+#define PIN1 (1U << 0U)
+#define PIN2 (1U << 1U)
+#define PIN3 (1U << 2U)
+#define PIN4 (1U << 3U)
+#define PIN5 (1U << 4U)
+#define PIN6 (1U << 5U)
+#define PIN7 (1U << 6U)
+#define PIN8 (1U << 7U)
 
 /*
  * Initialize one more GPIO pins to the selected mode.
@@ -88,24 +90,24 @@ void gpio_init(struct gpio_definition *, const struct gpio_init_config *);
  *
  * Requirement:1.1.1.2
  */
-void gpio_write(struct gpio_definition *, const uint8_t,
+void gpio_write(struct gpio_definition *, const u8,
                 const enum logic_level);
 
-/* 
+/*
  * Sets the GPIO pin to high logic level.
- * The pin has to be initialized as output. 
+ * The pin has to be initialized as output.
  *
  * Requirement:1.1.1.2
  */
-void gpio_set_high(struct gpio_definition *, const uint8_t);
+void gpio_set_high(struct gpio_definition *, const u8);
 
-/* 
+/*
  * Sets the GPIO pin to low logic level.
- * The pin has to be initialized as output. 
+ * The pin has to be initialized as output.
  *
  * Requirement:1.1.1.2
  */
-void gpio_set_low(struct gpio_definition *, const uint8_t);
+void gpio_set_low(struct gpio_definition *, const u8);
 
 /*
  * Reads the logic level of the GPIO pin.
@@ -113,6 +115,6 @@ void gpio_set_low(struct gpio_definition *, const uint8_t);
  *
  * Requirement:1.1.1.3
  */
-enum logic_level gpio_read(const struct gpio_definition *, const uint8_t);
+enum logic_level gpio_read(const struct gpio_definition *, const u8);
 
 #endif /* GPIO_H_ */

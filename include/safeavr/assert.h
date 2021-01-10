@@ -1,7 +1,7 @@
 #ifndef ASSERT_H_
 #define ASSERT_H_
 
-#include "safeavr/defs.h"
+#include "defs.h"
 
 /*
  * Aborts execution when the condition is false

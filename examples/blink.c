@@ -26,7 +26,7 @@ void initialize(void)
 
 void dummy_delay_one_second(void)
 {
-    for (uint32_t i = 0; i < 600000UL; i++) {
+    for (u32 i = 0; i < 600000UL; i++) {
         __asm__ __volatile__("nop");
     }
 }
