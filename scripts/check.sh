@@ -13,8 +13,4 @@ for filename in ${ROOT}/examples/*.c; do
   cppcheck ${OPTS} ${filename}
 done
 
-for filename in ${ROOT}/simulation/*.c; do
-  cppcheck ${OPTS} ${filename}
-done
-
 popd

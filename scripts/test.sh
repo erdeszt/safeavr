@@ -2,9 +2,9 @@
 
 set -e
 
-mkdir -p test_build
-pushd test_build
-cmake ../test
+mkdir -p build/test
+pushd build/test
+cmake ../../test
 make
 ctest --output-on-failure
 popd
