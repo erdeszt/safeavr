@@ -1,22 +1,15 @@
-/*
- * bits.h
- *
- * Created: 12/29/2020 12:31:38 PM
- *  Author: erdeszt
- */
-
 #ifndef DEFS_H_
 #define DEFS_H_
 
 /*
  * Standard integral types
  */
-typedef signed char int8_t;
-typedef unsigned char uint8_t;
-typedef signed int int16_t;
-typedef unsigned int uint16_t;
-typedef signed long int int32_t;
-typedef unsigned long int uint32_t;
+typedef signed char i8;
+typedef unsigned char u8;
+typedef signed int i16;
+typedef unsigned int u16;
+typedef signed long int i32;
+typedef unsigned long int u32;
 
 #define TRUE 1
 #define FALSE 0

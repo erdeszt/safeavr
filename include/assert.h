@@ -1,10 +1,3 @@
-/*
- * assert.h
- *
- * Created: 12/29/2020 7:36:40 PM
- *  Author: erdeszt
- */
-
 #ifndef ASSERT_H_
 #define ASSERT_H_
 

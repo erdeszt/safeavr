@@ -1,10 +1,3 @@
-/*
- * gpio.c
- *
- * Created: 12/29/2020 7:05:51 PM
- *  Author: erdeszt
- */
-
 #include "safeavr/assert.h"
 #include "safeavr/defs.h"
 #include "safeavr/gpio.h"
