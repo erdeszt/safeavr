@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.10)
 
 project(SafeAVRRoot C)
 
-include(Avr.cmake)
+set(ROOT_DIR .)
 
 if(NOT DEFINED DEVICE)
     set(DEVICE uno)
 endif()
 
-add_avr_library(safeavr_gpio src/gpio.c src/gpio_registers.c)
-target_include_directories(safeavr_gpio PUBLIC include)
+include(Avr.cmake)
+
+add_subdirectory(src)
 
 add_avr_executable(blink ${DEVICE} examples/blink.c)
 target_include_directories(blink.elf PUBLIC include)

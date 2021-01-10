@@ -2,7 +2,15 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-include(Flags.cmake)
+if(NOT DEFINED DEVICE)
+    message(FATAL_ERROR "DEVICE is not defined!")
+endif()
+
+if(NOT DEFINED ROOT_DIR)
+    message(FATAL_ERROR "ROOT_DIR is not defined")
+endif()
+
+include(${ROOT_DIR}/Flags.cmake)
 
 set(C_GENERAL_FLAGS "-std=c99 -nostdinc -funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -fno-common")
 set(C_OPTIMIZATION_FLAGS "-Os")
