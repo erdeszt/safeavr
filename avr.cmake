@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(C_WARNING_FLAGS "-Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -pedantic")
-set(C_GENERAL_FLAGS "-funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -fno-common")
+set(C_GENERAL_FLAGS "-std=c99 -nostdinc -funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -fno-common")
 set(C_OPTIMIZATION_FLAGS "-Os")
 
 function(upload_avr_executable HEX_NAME DEVICE)
@@ -37,7 +37,6 @@ function(add_avr_executable EXECUTABLE_NAME DEVICE)
 
     add_executable(${elf_file} ${ARGN})
 
-    # TODO: Add -nostdinc
     set_target_properties(
         ${elf_file}
         PROPERTIES
@@ -71,21 +70,6 @@ function(add_avr_library LIBRARY_NAME)
         COMPILE_FLAGS "-mmcu=${AVR_MCU} ${C_WARNING_FLAGS} ${C_GENERAL_FLAGS} ${C_OPTIMIZATION_FLAGS}"
         OUTPUT_NAME "${lib_file}"
     )
-
-    # TODO: Check if necessary
-    # if(NOT TARGET ${LIBRARY_NAME})
-    #     add_custom_target(
-    #             ${LIBRARY_NAME}
-    #             ALL
-    #             DEPENDS ${lib_file}
-    #     )
-
-    #     set_target_properties(
-    #             ${LIBRARY_NAME}
-    #             PROPERTIES
-    #             OUTPUT_NAME "${lib_file}"
-    #     )
-    # endif(NOT TARGET ${LIBRARY_NAME})
 
 endfunction(add_avr_library)
 

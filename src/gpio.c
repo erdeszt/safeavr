@@ -2,13 +2,6 @@
 #include "safeavr/defs.h"
 #include "safeavr/gpio.h"
 
-/*
- * TODO: Separate file for testabily
- */
-struct gpio_definition *GPIOB = (struct gpio_definition *)GPIOB_BASE_ADDRESS;
-struct gpio_definition *GPIOC = (struct gpio_definition *)GPIOC_BASE_ADDRESS;
-struct gpio_definition *GPIOD = (struct gpio_definition *)GPIOD_BASE_ADDRESS;
-
 static inline _Bool is_pin_mode_output(const struct gpio_definition *gpio,
                                        const u8 pin)
 {

@@ -8,12 +8,9 @@ if(NOT DEFINED DEVICE)
     set(DEVICE uno)
 endif()
 
-# TODO: Split file into libs and examples
-add_avr_library(safeavr_gpio src/gpio.c)
+add_avr_library(safeavr_gpio src/gpio.c src/gpio_registers.c)
 
 target_include_directories(safeavr_gpio PUBLIC include)
-
-add_avr_executable(raw ${DEVICE} examples/raw.c)
 
 add_avr_executable(blink ${DEVICE} examples/blink.c)
 
