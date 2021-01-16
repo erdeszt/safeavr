@@ -1,22 +1,8 @@
-#ifndef ASSERT_H_
-#define ASSERT_H_
+#ifndef SAFEAVR_ASSERT_H_
+#define SAFEAVR_ASSERT_H_
 
-#include "defs.h"
+#include "safeavr/defs.h"
 
-#if defined(DEBUG) && defined(NDEBUG)
-#error Both DEBUG and NDEBUG are defined!
-#endif
+void assert(boolean condition);
 
-/*
- * Aborts execution when the condition is false
- */
-#ifndef NDEBUG
-#define assert(condition)                                                      \
-    if (!(condition)) {                                                        \
-        panic();                                                               \
-    }
-#else
-#define assert(condition)
-#endif
-
-#endif /* ASSERT_H_ */
+#endif /* SAFEAVR_ASSERT_H_ */

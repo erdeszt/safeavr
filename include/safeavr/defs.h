@@ -1,5 +1,9 @@
-#ifndef DEFS_H_
-#define DEFS_H_
+#ifndef SAFEAVR_DEFS_H_
+#define SAFEAVR_DEFS_H_
+
+#if defined(DEBUG) && defined(NDEBUG)
+#error Both DEBUG and NDEBUG are defined!
+#endif
 
 /*
  * Standard integral types
@@ -11,10 +15,13 @@ typedef unsigned int u16;
 typedef signed long int i32;
 typedef unsigned long int u32;
 
+typedef _Bool boolean;
+
 #define TRUE 1
 #define FALSE 0
 
 #define NUL ((void *)0)
+#define UNUSED(x) ((void)(x))
 
 enum logic_level { LOW = 0, HIGH = 1 };
 
@@ -39,4 +46,4 @@ enum logic_level { LOW = 0, HIGH = 1 };
  */
 void panic(void);
 
-#endif /* DEFS_H_ */
+#endif /* SAFEAVR_DEFS_H_ */

@@ -10,5 +10,5 @@ endif()
 
 include(../Avr.cmake)
 
-add_avr_library(safeavr_gpio gpio.c gpio_registers.c)
+add_avr_library(safeavr_gpio assert.c gpio.c gpio_registers.c)
 target_include_directories(safeavr_gpio PUBLIC ${ROOT_DIR}/include)
