@@ -50,6 +50,9 @@ enum gpio_status gpio_init(struct gpio_definition *gpio,
         return GPIO_INVALID_DEFINITION;
     }
 
+    assert(is_valid_mode(config->mode));
+    assert(is_valid_pin(config->pin));
+
     if (config->mode == GPIO_OUTPUT) {
         SET_BIT(gpio->direction_register, (const u8)config->pin);
     } else {
