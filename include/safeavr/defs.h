@@ -20,7 +20,7 @@ typedef _Bool boolean;
 #define TRUE 1
 #define FALSE 0
 
-#define NUL ((void *)0)
+#define NULL ((void *)0)
 #define UNUSED(x) ((void)(x))
 
 enum logic_level { LOW = 0, HIGH = 1 };
