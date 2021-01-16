@@ -23,8 +23,6 @@ typedef _Bool boolean;
 #define NULL ((void *)0)
 #define UNUSED(x) ((void)(x))
 
-enum logic_level { LOW = 0, HIGH = 1 };
-
 /*
  * Bit manipulation and query helpers
  */
@@ -38,8 +36,8 @@ enum logic_level { LOW = 0, HIGH = 1 };
 /*
  * Interrupt helpers
  */
-#define enable_interrupts() __asm__ __volatile__("sei" ::: "memory")
-#define disable_interrupts() __asm__ __volatile__("cli" ::: "memory")
+#define ENABLE_INTERRUPTS() __asm__ __volatile__("sei" ::: "memory")
+#define DISABLE_INTERRUPTS() __asm__ __volatile__("cli" ::: "memory")
 
 /*
  * Panic function called in case of a non recoverable error.

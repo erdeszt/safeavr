@@ -1,14 +1,12 @@
+#ifndef SAFEAVR_GPIO_H_
+#define SAFEAVR_GPIO_H_
+
+#include "safeavr/defs.h"
+
 /*
- * gpio.h
- *
- * Created: 12/29/2020 12:32:22 PM
- *  Author: erdeszt
+ * Logic level of the GPIO pin
  */
-
-#ifndef GPIO_H_
-#define GPIO_H_
-
-#include "defs.h"
+enum logic_level { LOW = 0, HIGH = 1 };
 
 /*
  * Definition of GPIO pin modes
@@ -117,4 +115,4 @@ void gpio_set_low(struct gpio_definition *, const enum gpio_pin);
  */
 enum logic_level gpio_read(const struct gpio_definition *, const enum gpio_pin);
 
-#endif /* GPIO_H_ */
+#endif /* SAFEAVR_GPIO_H_ */
