@@ -2,22 +2,30 @@
 #include "safeavr/defs.h"
 #include "safeavr/gpio.h"
 
-static inline _Bool is_pin_mode_output(const struct gpio_definition *gpio,
-                                       const enum gpio_pin pin)
+static inline boolean is_pin_mode_output(const struct gpio_definition *gpio,
+                                         const enum gpio_pin pin)
 {
     return IS_BIT_SET(gpio->direction_register, (const u8)pin);
 }
 
-static inline _Bool is_pin_mode_input(const struct gpio_definition *gpio,
-                                      const enum gpio_pin pin)
+static inline boolean is_pin_mode_input(const struct gpio_definition *gpio,
+                                        const enum gpio_pin pin)
 {
     return IS_BIT_CLEAR(gpio->direction_register, (const u8)pin);
 }
 
-static inline _Bool is_valid_pin(const enum gpio_pin pin)
+static inline boolean is_valid_level(const enum gpio_logic_level level)
 {
-    _Bool result = FALSE;
+    return level == GPIO_LOW || level == GPIO_HIGH;
+}
 
+static inline boolean is_valid_mode(const enum gpio_mode mode)
+{
+    return mode == GPIO_INPUT || mode == GPIO_OUTPUT;
+}
+
+static inline boolean is_valid_pin(const enum gpio_pin pin)
+{
     switch (pin) {
     case PIN0:
     case PIN1:
@@ -27,32 +35,32 @@ static inline _Bool is_valid_pin(const enum gpio_pin pin)
     case PIN5:
     case PIN6:
     case PIN7:
-        result = TRUE;
+        return TRUE;
         break;
     default:
-        result = FALSE;
+        return FALSE;
         break;
     }
-
-    return result;
 }
 
-void gpio_init(struct gpio_definition *gpio,
-               const struct gpio_init_config *config)
+enum gpio_status gpio_init(struct gpio_definition *gpio,
+                           const struct gpio_init_config *config)
 {
-    // TODO: Check
-    assert(gpio);
+    if (!gpio) {
+        return GPIO_INVALID_DEFINITION;
+    }
 
-    // TODO: Set all pins
-    if (config->direction == OUTPUT) {
+    if (config->mode == GPIO_OUTPUT) {
         SET_BIT(gpio->direction_register, (const u8)config->pin);
     } else {
         CLEAR_BIT(gpio->direction_register, (const u8)config->pin);
     }
+
+    return GPIO_SUCCESS;
 }
 
 void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
-                const enum logic_level level)
+                const enum gpio_logic_level level)
 {
     assert(is_valid_pin(pin));
 
@@ -60,7 +68,7 @@ void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
     assert(gpio);
     assert(is_pin_mode_output(gpio, pin));
 
-    if (level == LOW) {
+    if (level == GPIO_LOW) {
         CLEAR_BIT(gpio->output_register, (const u8)pin);
     } else {
         SET_BIT(gpio->output_register, (const u8)pin);
@@ -89,8 +97,8 @@ void gpio_set_low(struct gpio_definition *gpio, const enum gpio_pin pin)
     CLEAR_BIT(gpio->output_register, (const u8)pin);
 }
 
-enum logic_level gpio_read(const struct gpio_definition *gpio,
-                           const enum gpio_pin pin)
+enum gpio_logic_level gpio_read(const struct gpio_definition *gpio,
+                                const enum gpio_pin pin)
 {
     assert(is_valid_pin(pin));
 
@@ -98,5 +106,6 @@ enum logic_level gpio_read(const struct gpio_definition *gpio,
     assert(gpio);
     assert(is_pin_mode_input(gpio, pin));
 
-    return IS_BIT_SET(gpio->input_register, (const u8)pin);
+    return (enum gpio_logic_level)IS_BIT_SET(gpio->input_register,
+                                             (const u8)pin);
 }

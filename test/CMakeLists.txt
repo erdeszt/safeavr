@@ -7,7 +7,7 @@ include(../Flags.cmake)
 enable_testing()
 
 # SafeAVR library with mocks
-add_library(safeavr_gpio_mocked ../src/gpio.c gpio_register_mocks.c)
+add_library(safeavr_gpio_mocked ../src/gpio.c ../src/assert.c gpio_register_mocks.c)
 set_target_properties(safeavr_gpio_mocked PROPERTIES COMPILE_FLAGS ${C_WARNING_FLAGS})
 target_include_directories(safeavr_gpio_mocked PUBLIC ../include)
 
@@ -15,10 +15,10 @@ target_include_directories(safeavr_gpio_mocked PUBLIC ../include)
 add_library(unity ../vendor/Unity/src/unity.c)
 target_include_directories(unity PUBLIC ../vendor/Unity/src)
 
-# Test suite executable
-add_executable(test_suite test_suite.c)
-target_link_libraries(test_suite safeavr_gpio_mocked unity)
-target_include_directories(test_suite PUBLIC ../vendor/Unity/src ../include)
-set_target_properties(test_suite PROPERTIES COMPILE_FLAGS ${C_WARNING_FLAGS})
+# GPIO test suite executable
+add_executable(gpio_tests gpio_tests.c)
+target_link_libraries(gpio_tests safeavr_gpio_mocked unity)
+target_include_directories(gpio_tests PUBLIC ../vendor/Unity/src ../include)
+set_target_properties(gpio_tests PROPERTIES COMPILE_FLAGS ${C_WARNING_FLAGS})
 
-add_test(NAME test_suite COMMAND test_suite)
+add_test(NAME gpio_tests COMMAND gpio_tests)

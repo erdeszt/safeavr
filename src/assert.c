@@ -4,13 +4,13 @@
 #ifndef NDEBUG
 void assert(boolean condition)
 {
-  if (!condition) {
-    panic();
-  }
+    if (!condition) {
+        panic();
+    }
 }
 #else
 void assert(boolean condition)
 {
-  UNUSED(condition);
+    UNUSED(condition);
 }
 #endif /* NDEBUG */
