@@ -1,8 +1,6 @@
 * Test
   * Finish GPIO tests
-    * Turn assertions to unit tests where it makes sense
-    * Consider different types of errors
-    * enum return types for library functions
+    * Write whitebox tests to verify register states
 * Add parameter names to function protypes (MISRA 8.2,8.3)
 * SimAVR
 * USART

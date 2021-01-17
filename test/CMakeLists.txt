@@ -13,7 +13,9 @@ target_include_directories(safeavr_gpio_mocked PUBLIC ../include)
 
 # Unity library
 add_library(unity ../vendor/Unity/src/unity.c)
+add_definitions(-DUNITY_INCLUDE_CONFIG_H)
 target_include_directories(unity PUBLIC ../vendor/Unity/src)
+target_include_directories(unity PUBLIC .)
 
 # GPIO test suite executable
 add_executable(gpio_tests gpio_tests.c)

@@ -1,6 +1,26 @@
 #include <unity.h>
 #include <safeavr/gpio.h>
 
+#define NUMBER_OF_PINS 8
+#define NUMBER_OF_MODES 2
+#define NUMBER_OF_LEVELS 2
+
+enum gpio_pin pins[NUMBER_OF_PINS] = { PIN0, PIN1, PIN2, PIN3,
+                                       PIN4, PIN5, PIN6, PIN7 };
+enum gpio_mode modes[NUMBER_OF_MODES] = { GPIO_INPUT, GPIO_OUTPUT };
+enum gpio_logic_level levels[NUMBER_OF_LEVELS] = { GPIO_LOW, GPIO_HIGH };
+
+/* Iterator for collections of pins, modes and levels */
+#define FORALL(var, type, in, count)                                           \
+    enum type var = in[0];                                                     \
+    for (u8 var##_index = 0; var##_index < count;                              \
+         var##_index++, var = in[var##_index])
+
+#define FORALL_PINS(var) FORALL(var, gpio_pin, pins, NUMBER_OF_PINS)
+#define FORALL_MODES(var) FORALL(var, gpio_mode, modes, NUMBER_OF_MODES)
+#define FORALL_LEVELS(var)                                                     \
+    FORALL(var, gpio_logic_level, levels, NUMBER_OF_LEVELS)
+
 void clear_registers()
 {
     GPIOB->direction_register = 0;
@@ -19,38 +39,105 @@ void panic(void)
     TEST_FAIL_MESSAGE("PANIC");
 }
 
-void test_gpio_init_single_pin_all_positions(void)
+void blackbox_gpio_init_all_pins_all_modes(void)
 {
-    /* Check all the pins */
-    for (u8 current_pin = (u8)PIN0; current_pin <= (u8)PIN7; current_pin++) {
-        struct gpio_init_config test_pin = { .mode = GPIO_OUTPUT,
-                                             .pin =
-                                                 (enum gpio_pin)current_pin };
-        enum gpio_status status = gpio_init(GPIOB, &test_pin);
+    FORALL_PINS(pin)
+    {
+        FORALL_MODES(mode)
+        {
+            const struct gpio_init_config config = { .mode = mode, .pin = pin };
 
-        TEST_ASSERT_EQUAL(status, GPIO_SUCCESS);
+            const enum gpio_status status = gpio_init(GPIOB, &config);
 
-        for (u8 pin = (u8)PIN0; pin <= (u8)PIN7; pin++) {
-            /* If this is the current pin, it should be set,
-             * otherwise it should be cleared.
-             */
-            if (pin == current_pin) {
-                TEST_ASSERT_BIT_HIGH(pin, GPIOB->direction_register);
-            } else {
-                TEST_ASSERT_BIT_LOW(pin, GPIOB->direction_register);
-            }
+            TEST_ASSERT_EQUAL(status, GPIO_SUCCESS);
         }
-
-        clear_registers();
     }
 }
 
-void test_gpio_init_invalid_gpio(void)
+void blackbox_gpio_init_invalid_gpio(void)
 {
-    struct gpio_init_config test_pin = { .mode = GPIO_OUTPUT, .pin = PIN0 };
-    enum gpio_status status = gpio_init(NULL, &test_pin);
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+
+    const enum gpio_status status = gpio_init(NULL, &config);
 
     TEST_ASSERT_EQUAL(status, GPIO_INVALID_DEFINITION);
+}
+
+void blackbox_gpio_write_all_pins_all_levels(void)
+{
+    FORALL_PINS(pin)
+    {
+        FORALL_LEVELS(level)
+        {
+            const struct gpio_init_config config = { .mode = GPIO_OUTPUT,
+                                                     .pin = pin };
+            (void)gpio_init(GPIOB, &config);
+
+            const enum gpio_status status = gpio_write(GPIOB, pin, level);
+
+            TEST_ASSERT_EQUAL(status, GPIO_SUCCESS);
+        }
+    }
+}
+
+void blackbox_gpio_write_invalid_gpio(void)
+{
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+    (void)gpio_init(GPIOB, &config);
+
+    const enum gpio_status status = gpio_write(NULL, PIN0, GPIO_HIGH);
+
+    TEST_ASSERT_EQUAL(status, GPIO_INVALID_DEFINITION);
+}
+
+void blackbox_gpio_write_invalid_mode(void)
+{
+    const struct gpio_init_config config = { .mode = GPIO_INPUT, .pin = PIN0 };
+    (void)gpio_init(GPIOB, &config);
+
+    const enum gpio_status status = gpio_write(GPIOB, PIN0, GPIO_HIGH);
+
+    TEST_ASSERT_EQUAL(status, GPIO_INVALID_MODE);
+}
+
+void blackbox_gpio_read_all_pins(void)
+{
+    FORALL_PINS(pin)
+    {
+        enum gpio_logic_level level = GPIO_HIGH;
+        const struct gpio_init_config config = { .mode = GPIO_INPUT,
+                                                 .pin = pin };
+        (void)gpio_init(GPIOB, &config);
+
+        const enum gpio_status status = gpio_read(GPIOB, pin, &level);
+
+        TEST_ASSERT_EQUAL(status, GPIO_SUCCESS);
+        TEST_ASSERT_EQUAL(level, GPIO_LOW);
+    }
+}
+
+void blackbox_gpio_read_invalid_gpio(void)
+{
+    enum gpio_logic_level level = GPIO_HIGH;
+    const struct gpio_init_config config = { .mode = GPIO_INPUT, .pin = PIN0 };
+    (void)gpio_init(GPIOB, &config);
+
+    const enum gpio_status status = gpio_read(NULL, PIN0, &level);
+
+    TEST_ASSERT_EQUAL(status, GPIO_INVALID_DEFINITION);
+    TEST_ASSERT_EQUAL(level, GPIO_HIGH);
+}
+
+void blackbox_gpio_read_invalid_mode(void)
+{
+    enum gpio_logic_level level = GPIO_HIGH;
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+    (void)gpio_init(GPIOB, &config);
+
+    const enum gpio_status status = gpio_read(GPIOB, PIN0, &level);
+
+    TEST_ASSERT_EQUAL(status, GPIO_INVALID_MODE);
+    TEST_ASSERT_EQUAL(level, GPIO_HIGH);
 }
 
 void setUp(void)
@@ -66,8 +153,14 @@ int main(void)
 {
     UNITY_BEGIN();
 
-    RUN_TEST(test_gpio_init_single_pin_all_positions);
-    RUN_TEST(test_gpio_init_invalid_gpio);
+    RUN_TEST(blackbox_gpio_init_all_pins_all_modes);
+    RUN_TEST(blackbox_gpio_init_invalid_gpio);
+    RUN_TEST(blackbox_gpio_write_all_pins_all_levels);
+    RUN_TEST(blackbox_gpio_write_invalid_gpio);
+    RUN_TEST(blackbox_gpio_write_invalid_mode);
+    RUN_TEST(blackbox_gpio_read_all_pins);
+    RUN_TEST(blackbox_gpio_read_invalid_gpio);
+    RUN_TEST(blackbox_gpio_read_invalid_mode);
 
     return UNITY_END();
 }
