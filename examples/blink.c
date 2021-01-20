@@ -9,9 +9,9 @@ int main(void)
     initialize();
 
     while (TRUE) {
-        (void)gpio_write(GPIOB, PIN0, GPIO_HIGH);
+        gpio_write(GPIOB, PIN0, GPIO_HIGH);
         dummy_delay_one_second();
-        (void)gpio_write(GPIOB, PIN0, GPIO_LOW);
+        gpio_write(GPIOB, PIN0, GPIO_LOW);
         dummy_delay_one_second();
     }
 
@@ -22,7 +22,7 @@ void initialize(void)
 {
     struct gpio_init_config d9 = { .mode = GPIO_OUTPUT, .pin = PIN0 };
 
-    (void)gpio_init(GPIOB, &d9);
+    gpio_init(GPIOB, &d9);
 }
 
 void dummy_delay_one_second(void)
