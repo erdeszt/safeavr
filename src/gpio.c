@@ -21,6 +21,8 @@ static inline boolean is_valid_mode(const enum gpio_mode mode)
 
 static inline boolean is_valid_pin(const enum gpio_pin pin)
 {
+    boolean is_valid = FALSE;
+
     switch (pin) {
     case PIN0:
     case PIN1:
@@ -30,12 +32,14 @@ static inline boolean is_valid_pin(const enum gpio_pin pin)
     case PIN5:
     case PIN6:
     case PIN7:
-        return TRUE;
+        is_valid = TRUE;
         break;
     default:
-        return FALSE;
+        is_valid = FALSE;
         break;
     }
+
+    return is_valid;
 }
 
 void gpio_init(struct gpio_definition *gpio,

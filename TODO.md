@@ -3,6 +3,8 @@
     * Finish negative black box tests
     * Write whitebox tests to verify register states
 * Update cmake to support c++20
+* Add CppUTest as a git submodule
+* Add build/test/dependencies instructions
 * SimAVR
 * USART
 * MisraC compliance
