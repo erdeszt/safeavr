@@ -32,12 +32,6 @@ enum gpio_pin {
     PIN7 = 7,
 };
 
-enum gpio_status {
-    GPIO_SUCCESS = 0,
-    GPIO_INVALID_DEFINITION = 1,
-    GPIO_INVALID_MODE = 2,
-};
-
 /*
  * Memory mapping of GPIO ports.
  * Each port includes a direction register to configure pins as input or output,
@@ -86,8 +80,8 @@ extern struct gpio_definition *GPIOD;
  *
  * Requirement:1.1.1.1
  */
-enum gpio_status gpio_init(struct gpio_definition *gpio,
-                           const struct gpio_init_config *config);
+void gpio_init(struct gpio_definition *gpio,
+               const struct gpio_init_config *config);
 
 /*
  * Write the selected logic level to the specified GPIO pin.
@@ -95,9 +89,8 @@ enum gpio_status gpio_init(struct gpio_definition *gpio,
  *
  * Requirement:1.1.1.2
  */
-enum gpio_status gpio_write(struct gpio_definition *gpio,
-                            const enum gpio_pin pin,
-                            const enum gpio_logic_level value);
+void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
+                const enum gpio_logic_level value);
 
 /*
  * Reads the logic level of the GPIO pin.
@@ -105,8 +98,7 @@ enum gpio_status gpio_write(struct gpio_definition *gpio,
  *
  * Requirement:1.1.1.3
  */
-enum gpio_status gpio_read(const struct gpio_definition *gpio,
-                           const enum gpio_pin pin,
-                           enum gpio_logic_level *level);
+enum gpio_logic_level gpio_read(const struct gpio_definition *gpio,
+                                const enum gpio_pin pin);
 
 #endif /* SAFEAVR_GPIO_H_ */

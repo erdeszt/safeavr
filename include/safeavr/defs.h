@@ -15,10 +15,15 @@ typedef unsigned int u16;
 typedef signed long int i32;
 typedef unsigned long int u32;
 
+#ifdef __cplusplus
+typedef bool boolean;
+#define TRUE true
+#define FALSE false
+#else
 typedef _Bool boolean;
-
 #define TRUE 1
 #define FALSE 0
+#endif
 
 #define NULL ((void *)0)
 #define UNUSED(x) ((void)(x))

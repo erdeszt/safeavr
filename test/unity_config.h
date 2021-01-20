@@ -1,6 +1,0 @@
-#ifndef UNITY_CONFIG_H_
-#define UNITY_CONFIG_H_
-
-#define UNITY_INCLUDE_PRINT_FORMATTED
-
-#endif /* UNITY_CONFIG_H_ */

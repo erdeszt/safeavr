@@ -1,3 +1,4 @@
+#include "safeavr_config.h"
 #include <safeavr/gpio.h>
 
 void initialize(void);

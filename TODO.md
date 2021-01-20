@@ -1,7 +1,8 @@
 * Test
   * Finish GPIO tests
+    * Finish negative black box tests
     * Write whitebox tests to verify register states
-* Add parameter names to function protypes (MISRA 8.2,8.3)
+* Update cmake to support c++20
 * SimAVR
 * USART
 * MisraC compliance

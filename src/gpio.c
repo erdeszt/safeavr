@@ -38,65 +38,42 @@ static inline boolean is_valid_pin(const enum gpio_pin pin)
     }
 }
 
-enum gpio_status gpio_init(struct gpio_definition *gpio,
-                           const struct gpio_init_config *config)
+void gpio_init(struct gpio_definition *gpio,
+               const struct gpio_init_config *config)
 {
+    assert(gpio != NULL);
     assert(is_valid_mode(config->mode));
     assert(is_valid_pin(config->pin));
-
-    if (gpio == NULL) {
-        return GPIO_INVALID_DEFINITION;
-    }
 
     if (config->mode == GPIO_OUTPUT) {
         SET_BIT(gpio->direction_register, (const u8)config->pin);
     } else {
         CLEAR_BIT(gpio->direction_register, (const u8)config->pin);
     }
-
-    return GPIO_SUCCESS;
 }
 
-enum gpio_status gpio_write(struct gpio_definition *gpio,
-                            const enum gpio_pin pin,
-                            const enum gpio_logic_level level)
+void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
+                const enum gpio_logic_level level)
 {
+    assert(gpio != NULL);
     assert(is_valid_pin(pin));
-
-    if (gpio == NULL) {
-        return GPIO_INVALID_DEFINITION;
-    }
-
-    if (!is_pin_mode_output(gpio, pin)) {
-        return GPIO_INVALID_MODE;
-    }
+    assert(is_pin_mode_output(gpio, pin));
 
     if (level == GPIO_LOW) {
         CLEAR_BIT(gpio->output_register, (const u8)pin);
     } else {
         SET_BIT(gpio->output_register, (const u8)pin);
     }
-
-    return GPIO_SUCCESS;
 }
 
-enum gpio_status gpio_read(const struct gpio_definition *gpio,
-                           const enum gpio_pin pin,
-                           enum gpio_logic_level *level)
+enum gpio_logic_level gpio_read(const struct gpio_definition *gpio,
+                                const enum gpio_pin pin)
 {
+    assert(gpio != NULL);
     assert(is_valid_pin(pin));
+    assert(is_pin_mode_input(gpio, pin));
 
-    if (gpio == NULL) {
-        return GPIO_INVALID_DEFINITION;
-    }
-
-    if (!is_pin_mode_input(gpio, pin)) {
-        return GPIO_INVALID_MODE;
-    }
-
-    *level =
-        (enum gpio_logic_level)IS_BIT_SET(gpio->input_register, (const u8)pin);
-
-    return GPIO_SUCCESS;
+    return (enum gpio_logic_level)IS_BIT_SET(gpio->input_register,
+                                             (const u8)pin);
 }
 
