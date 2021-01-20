@@ -1,6 +1,5 @@
 * Test
   * Finish GPIO tests
-    * Finish negative black box tests
     * Write whitebox tests to verify register states
 * Update cmake to support c++20
 * Add CppUTest as a git submodule
