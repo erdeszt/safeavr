@@ -19,6 +19,11 @@ static inline boolean is_valid_mode(const enum gpio_mode mode)
     return (mode == GPIO_INPUT) || (mode == GPIO_OUTPUT);
 }
 
+static inline boolean is_valid_logic_level(const enum gpio_logic_level level)
+{
+    return (level == GPIO_LOW) || (level == GPIO_HIGH);
+}
+
 static inline boolean is_valid_pin(const enum gpio_pin pin)
 {
     boolean is_valid = FALSE;
@@ -61,6 +66,7 @@ void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
 {
     assert(gpio != NULL);
     assert(is_valid_pin(pin));
+    assert(is_valid_logic_level(level));
     assert(is_pin_mode_output(gpio, pin));
 
     if (level == GPIO_LOW) {

@@ -52,13 +52,6 @@ TEST_GROUP(GpioWhiteBox)
 };
 // clang-format on
 
-TEST(GpioBlackBox, init_with_invalid_definition)
-{
-    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
-
-    CHECK_THROWS(PanicException, gpio_init(NULL, &config));
-}
-
 TEST(GpioBlackBox, init_all_pins_all_modes)
 {
     for (const auto pin : pins) {
@@ -70,7 +63,30 @@ TEST(GpioBlackBox, init_all_pins_all_modes)
     }
 }
 
-TEST(GpioBlackBox, blackbox_gpio_write_all_pins_all_levels)
+TEST(GpioBlackBox, init_with_invalid_definition)
+{
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+
+    CHECK_THROWS(PanicException, gpio_init(NULL, &config));
+}
+
+TEST(GpioBlackBox, init_with_invalid_mode)
+{
+    const struct gpio_init_config config = { .mode = (enum gpio_mode)100,
+                                             .pin = PIN0 };
+
+    CHECK_THROWS(PanicException, gpio_init(GPIOB, &config));
+}
+
+TEST(GpioBlackBox, init_with_invalid_pin)
+{
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT,
+                                             .pin = (enum gpio_pin)100 };
+
+    CHECK_THROWS(PanicException, gpio_init(GPIOB, &config));
+}
+
+TEST(GpioBlackBox, write_all_pins_all_levels)
 {
     for (const auto pin : pins) {
         for (const auto level : levels) {
@@ -83,7 +99,31 @@ TEST(GpioBlackBox, blackbox_gpio_write_all_pins_all_levels)
     }
 }
 
-TEST(GpioBlackBox, blackbox_gpio_read_all_pins)
+TEST(GpioBlackBox, write_invalid_definition)
+{
+    CHECK_THROWS(PanicException, gpio_write(NULL, PIN0, GPIO_LOW));
+}
+
+TEST(GpioBlackBox, write_invalid_pin)
+{
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+
+    gpio_init(GPIOB, &config);
+
+    CHECK_THROWS(PanicException,
+                 gpio_write(GPIOB, (enum gpio_pin)100, GPIO_LOW));
+}
+
+TEST(GpioBlackBox, write_invalid_mode)
+{
+    const struct gpio_init_config config = { .mode = GPIO_INPUT, .pin = PIN0 };
+
+    gpio_init(GPIOB, &config);
+
+    CHECK_THROWS(PanicException, gpio_write(GPIOB, PIN0, GPIO_LOW));
+}
+
+TEST(GpioBlackBox, read_all_pins)
 {
     for (const auto pin : pins) {
         const struct gpio_init_config config = { .mode = GPIO_INPUT,
@@ -94,6 +134,29 @@ TEST(GpioBlackBox, blackbox_gpio_read_all_pins)
 
         CHECK_EQUAL(level, GPIO_LOW);
     }
+}
+
+TEST(GpioBlackBox, read_invalid_definition)
+{
+    CHECK_THROWS(PanicException, gpio_read(NULL, PIN0));
+}
+
+TEST(GpioBlackBox, read_invalid_pin)
+{
+    const struct gpio_init_config config = { .mode = GPIO_INPUT, .pin = PIN0 };
+
+    gpio_init(GPIOB, &config);
+
+    CHECK_THROWS(PanicException, gpio_read(NULL, PIN0));
+}
+
+TEST(GpioBlackBox, read_invalid_mode)
+{
+    const struct gpio_init_config config = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+
+    gpio_init(GPIOB, &config);
+
+    CHECK_THROWS(PanicException, gpio_read(GPIOB, PIN0));
 }
 
 int main(int argc, char **argv)
