@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+mkdir -p build/simulation
+pushd build/simulation
+cmake ../../simulation
+make
+./simulation
+popd
