@@ -159,6 +159,57 @@ TEST(GpioBlackBox, read_invalid_mode)
     CHECK_THROWS(PanicException, gpio_read(GPIOB, PIN0));
 }
 
+TEST(GpioWhiteBox, init_correct_bits)
+{
+    for (const auto pin : pins) {
+        const struct gpio_init_config config = { .mode = GPIO_OUTPUT,
+                                                 .pin = pin };
+
+        gpio_init(GPIOB, &config);
+
+        CHECK_EQUAL(GPIOB->direction_register, BIT_VALUE(pin));
+
+        clear_registers();
+    }
+}
+
+TEST(GpioWhiteBox, write_correct_bits)
+{
+    for (const auto pin : pins) {
+        const struct gpio_init_config config = { .mode = GPIO_OUTPUT,
+                                                 .pin = pin };
+
+        gpio_init(GPIOB, &config);
+
+        gpio_write(GPIOB, pin, GPIO_HIGH);
+
+        CHECK_EQUAL(GPIOB->output_register, BIT_VALUE(pin));
+
+        clear_registers();
+    }
+}
+
+TEST(GpioWhiteBox, read_correct_value)
+{
+    for (const auto pin : pins) {
+        const struct gpio_init_config config = { .mode = GPIO_INPUT,
+                                                 .pin = pin };
+
+        gpio_init(GPIOB, &config);
+
+        const enum gpio_logic_level level_default = gpio_read(GPIOB, pin);
+
+        GPIOB->input_register = BIT_VALUE(pin);
+
+        const enum gpio_logic_level level_high = gpio_read(GPIOB, pin);
+
+        CHECK_EQUAL(level_default, 0);
+        CHECK_EQUAL(level_high, 1);
+
+        clear_registers();
+    }
+}
+
 int main(int argc, char **argv)
 {
     return CommandLineTestRunner::RunAllTests(argc, argv);

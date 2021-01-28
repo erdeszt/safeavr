@@ -1,11 +1,10 @@
-* Test
-  * Finish GPIO tests
-    * Write whitebox tests to verify register states
+* github flow with tests
 * Update cmake to support c++20
 * Add CppUTest as a git submodule
 * Add build/test/dependencies instructions
 * SimAVR
 * USART
+* real timer, dummy doesn't work in simulation tracing
 * MisraC compliance
   * Create compliance matrix
   * Document deviations for IO mapped registers (11.4)
