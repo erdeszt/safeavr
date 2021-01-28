@@ -1,5 +1,6 @@
 * USART
 * real timer, dummy doesn't work in simulation tracing
+* Cleanup simulation
 * github flow with tests
 * Add build/test/dependencies instructions
 * MisraC compliance
