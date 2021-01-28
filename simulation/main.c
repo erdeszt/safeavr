@@ -20,6 +20,7 @@ int main(void)
 
     printf("Should debug? ");
     scanf("%s", should_debug_input);
+    getchar();
 
     const bool should_debug = strcmp(should_debug_input, "yes") == 0;
 
