@@ -9,9 +9,7 @@ int main(void)
     initialize();
 
     while (TRUE) {
-        gpio_write(GPIOB, PIN0, GPIO_HIGH);
-        dummy_delay_one_second();
-        gpio_write(GPIOB, PIN0, GPIO_LOW);
+        usart_send("Hello 10\n");
         dummy_delay_one_second();
     }
 
@@ -20,9 +18,15 @@ int main(void)
 
 void initialize(void)
 {
-    struct gpio_init_config d9 = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+    struct usart_init_config usart_config = {
+        .cpu_clock_speed = 16000000UL,
+        .baud_rate = 9600,
+        .data_bits = USART_DATA_BITS_8,
+        .parity_bit = USART_PARITY_BIT_NO,
+        .stop_bit = USART_STOP_BIT_1,
+    };
 
-    gpio_init(GPIOB, &d9);
+    usart_init(&usart_config);
 }
 
 void dummy_delay_one_second(void)

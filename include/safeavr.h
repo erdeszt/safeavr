@@ -12,6 +12,10 @@ extern "C" {
 #include "safeavr/gpio.h"
 #endif
 
+#if SAFEAVR_FEATURE_USART == 1
+#include "safeavr/usart.h"
+#endif
+
 #ifdef __cplusplus
 }
 #endif
