@@ -30,8 +30,8 @@ void usart_init(const struct usart_init_config *config)
 
 void usart_send(const char *message)
 {
-    int char_index = 0;
-    int wait_count = 0;
+    u16 char_index = 0;
+    u16 wait_count = 0;
 
     for (; message[char_index] && char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE;
          char_index++) {
