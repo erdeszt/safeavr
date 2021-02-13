@@ -60,8 +60,8 @@ struct usart_control_def_b {
 struct usart_control_def_c {
     volatile enum usart_clock_polarity clock_polarity : 1;
     volatile enum usart_character_size character_size : 2;
-    volatile enum usart_stop_bits stop_bit : 1;
-    volatile enum usart_parity_bit parity_mode_0 : 2;
+    volatile enum usart_stop_bits stop_bits : 1;
+    volatile enum usart_parity_bit parity_bit : 2;
     volatile enum usart_mode mode : 2;
 };
 

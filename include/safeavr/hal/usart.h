@@ -20,6 +20,10 @@ struct usart_init_config {
     boolean multi_processor_mode;
 };
 
+extern const u16 SAFEAVR_USART_TX_MAX_STRING_SIZE;
+extern const u16 SAFEAVR_USART_TX_MAX_WAIT;
+extern const u16 SAFEAVR_USART_RX_MAX_WAIT;
+
 void usart_init(const struct usart_init_config *config);
 
 void usart_send(const char *message);

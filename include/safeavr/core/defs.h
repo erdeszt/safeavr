@@ -3,6 +3,7 @@
 
 #define NULL ((void *)0)
 #define UNUSED(x) ((void)(x))
+#define NOP() __asm__ __volatile__("nop")
 
 void panic(void);
 

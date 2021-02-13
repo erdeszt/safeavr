@@ -28,7 +28,7 @@ void initialize(void)
 void dummy_delay_one_second(void)
 {
     for (u32 i = 0; i < 1200000UL; i++) {
-        __asm__ __volatile__("nop");
+        NOP();
     }
 }
 
@@ -37,6 +37,6 @@ void panic(void)
     DISABLE_INTERRUPTS();
 
     while (TRUE) {
-        ;
+        NOP();
     }
 }

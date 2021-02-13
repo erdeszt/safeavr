@@ -1,7 +1,13 @@
 #ifndef SAFEAVR_CONFIG_H
 #define SAFEAVR_CONFIG_H
 
+#include <safeavr/core/types.h>
+
 #define SAFEAVR_FEATURE_GPIO 1
 #define SAFEAVR_FEATURE_USART 1
+
+const u16 SAFEAVR_USART_TX_MAX_STRING_SIZE = 128;
+const u16 SAFEAVR_USART_TX_MAX_WAIT = 1000;
+const u16 SAFEAVR_USART_RX_MAX_WAIT = 1000;
 
 #endif /* SAFEAVR_CONFIG_H */

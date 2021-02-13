@@ -8,29 +8,47 @@ struct usart_control *usart0 = (struct usart_control *)0xC0;
 
 void usart_init(const struct usart_init_config *config)
 {
-    assert(config->baud_rate > 0);
+    switch (config->baud_rate) {
+    case USART_BAUD_RATE_9600:
+        usart0->baud_high = 0;
+        usart0->baud_low = 103;
+    default:
+        panic();
+    }
 
-    // UBRR0H = ((u16)baud_rate_register_value) >> 8u;
-    // UBRR0L = ((u16)baud_rate_register_value) & 0xffu;
-    usart0->baud_high = 0;
-    usart0->baud_low = 103;
+    usart0->control_a.multi_processor_mode = (u8)config->multi_processor_mode;
 
     usart0->control_b.tx_enable = 1;
-    usart0->control_c.character_size = USART_CHARACTER_SIZE_8;
+    usart0->control_b.rx_enable = 1;
+
+    usart0->control_c.character_size = config->baud_rate;
+    usart0->control_c.stop_bits = config->stop_bits;
+    usart0->control_c.parity_bit = config->parity_bit;
+    usart0->control_c.mode = config->mode;
+    usart0->control_c.clock_polarity = config->clock_polarity;
 }
 
 void usart_send(const char *message)
 {
-    // TODO: Abstraction for test:
-    // TODO: Static limits on the loops
-    for (int i = 0; message[i]; i++) {
-        // TODO: Check for UDRE0
-        // while (!(UCSR0A & (1u << UDRE0))) ;
+    int char_index = 0;
+    int wait_count = 0;
 
-        usart0->data = message[i];
-
-        for (i16 j = 0; j < 10000; j++) {
-            __asm__ __volatile__("nop");
+    for (; message[char_index] && char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE;
+         char_index++) {
+        for (wait_count = 0; usart0->control_a.data_register_empty == 0 &&
+                             wait_count < SAFEAVR_USART_TX_MAX_WAIT;
+             wait_count++) {
+            NOP();
         }
+
+        if (wait_count >= SAFEAVR_USART_TX_MAX_WAIT) {
+            panic();
+        }
+
+        usart0->data = message[char_index];
+    }
+
+    if (char_index >= SAFEAVR_USART_TX_MAX_STRING_SIZE) {
+        panic();
     }
 }
