@@ -2,10 +2,22 @@
 
 (Somwhat)MISRA2012 compliant C library for AVR microcontrollers.
 
-Supported MCUs:
+## Supported MCUs:
 
 * ATMega328P
 
-Features:
+## Features:
 
 * GPIO
+* USART
+
+## Build:
+
+### Install requirements:
+
+* `gcc-avr`
+* `binutils-avr`
+* `cmake`
+* [Optional]`cppcheck`
+* [Optional]`ctags`
+
