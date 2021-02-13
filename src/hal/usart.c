@@ -1,6 +1,8 @@
 #include "safeavr/core/assert.h"
-#include "safeavr/defs.h"
-#include "safeavr/usart.h"
+#include "safeavr/core/defs.h"
+#include "safeavr/core/types.h"
+#include "safeavr/core/usart.h"
+#include "safeavr/hal/usart.h"
 
 struct usart_control *usart0 = (struct usart_control *)0xC0;
 
