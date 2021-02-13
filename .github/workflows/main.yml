@@ -18,7 +18,7 @@ jobs:
           submodules: recursive
 
       - name: Install unmanaged dependencies
-        run: sudo apt-get install cmake gcc-avr binutils-avr cmake
+        run: sudo apt-get install cmake gcc-avr binutils-avr avr-libc cmake
 
       - name: Build examples
         run: ./scripts/build
