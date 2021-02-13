@@ -3,6 +3,7 @@ Debug
 *.dump
 *.pyc
 build
+!scripts/build
 test_build
 __pycache__
 tags
