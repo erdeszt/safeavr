@@ -1,8 +1,8 @@
 * USART
 * real timer, dummy doesn't work in simulation tracing
+* Cleanup warnings in tests
 * Cleanup simulation
   * cli arg for target file and mode(debug, run)
-* Encapsulation for gpio(hide internal struct defs and base address)
 * github flow with tests
 * Add build/test/dependencies instructions
 * Cmake link against specific libraries in examples

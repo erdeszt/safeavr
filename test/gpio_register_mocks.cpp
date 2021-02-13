@@ -1,5 +1,5 @@
 #include "safeavr_config.h"
-#include <safeavr.h>
+#include <safeavr/hal.h>
 
 struct gpio_definition gpio_b_mock = {
     .input_register = 0u,
