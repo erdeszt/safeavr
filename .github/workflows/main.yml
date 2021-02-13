@@ -22,10 +22,8 @@ jobs:
         run: sudo apt-get install cmake gcc-avr binutils-avr cmake
 
       - name: Build examples
-        run: |
-          ls -al
-          ls -al $GITHUB_WORKSPACE
-          ./scripts/build
+        run: ./scripts/build
+        shell: bash
 
 
 
