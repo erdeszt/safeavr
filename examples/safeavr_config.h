@@ -1,7 +1,7 @@
-#ifndef SAFEAVR_CONFIG_H_
-#define SAFEAVR_CONFIG_H_
+#ifndef SAFEAVR_CONFIG_H
+#define SAFEAVR_CONFIG_H
 
 #define SAFEAVR_FEATURE_GPIO 1
 #define SAFEAVR_FEATURE_USART 1
 
-#endif /* SAFEAVR_CONFIG_H_ */
+#endif /* SAFEAVR_CONFIG_H */

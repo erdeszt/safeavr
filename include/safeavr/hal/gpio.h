@@ -1,7 +1,7 @@
-#ifndef SAFEAVR_GPIO_H_
-#define SAFEAVR_GPIO_H_
+#ifndef SAFEAVR_HAL_GPIO_H
+#define SAFEAVR_HAL_GPIO_H
 
-#include "safeavr/defs.h"
+#include "safeavr/core/types.h"
 
 /*
  * Logic level of the GPIO pin
@@ -33,20 +33,6 @@ enum gpio_pin {
 };
 
 /*
- * Memory mapping of GPIO ports.
- * Each port includes a direction register to configure pins as input or output,
- * an input register for reading the logic level of the pins and an output register
- * for setting the logic level of the pins.
- *
- * Requirement:1.1.1
- */
-struct gpio_definition {
-    volatile u8 input_register;
-    volatile u8 direction_register;
-    volatile u8 output_register;
-};
-
-/*
  * Configuration for initializing GPIO pins.
  * The member `pin` can contain multiple 1 bits and the corresponding pins
  * will be set to the configured `direction`.
@@ -55,24 +41,6 @@ struct gpio_init_config {
     enum gpio_mode mode;
     enum gpio_pin pin;
 };
-
-/*
- * The offset of the memory mapped IO addresses
- */
-#define SFR_OFFSET 0x20
-
-/*
- * Definition of the GPIO ports B, C and D
- *
- * Requirement:1.1.1
- */
-#define GPIOB_BASE_ADDRESS (SFR_OFFSET + 0x03)
-#define GPIOC_BASE_ADDRESS (SFR_OFFSET + 0x06)
-#define GPIOD_BASE_ADDRESS (SFR_OFFSET + 0x09)
-
-extern struct gpio_definition *GPIOB;
-extern struct gpio_definition *GPIOC;
-extern struct gpio_definition *GPIOD;
 
 /*
  * Initialize one more GPIO pins to the selected mode.
@@ -101,4 +69,4 @@ void gpio_write(struct gpio_definition *gpio, const enum gpio_pin pin,
 enum gpio_logic_level gpio_read(const struct gpio_definition *gpio,
                                 const enum gpio_pin pin);
 
-#endif /* SAFEAVR_GPIO_H_ */
+#endif /* SAFEAVR_HAL_GPIO_H */

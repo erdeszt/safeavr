@@ -1,5 +1,5 @@
 #include "safeavr_config.h"
-#include <safeavr.h>
+#include <safeavr/hal.h>
 
 void initialize(void);
 void dummy_delay_one_second(void);

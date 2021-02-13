@@ -27,7 +27,7 @@ int main(void)
     elf_firmware_t f;
 
     const int32_t elf_read_result =
-        elf_read_firmware("../examples/blink.elf", &f);
+        elf_read_firmware("../examples/serial.elf", &f);
 
     if (elf_read_result == 0) {
         printf("MMCU: `%s`, symbol count: %d\n", f.mmcu, f.symbolcount);
