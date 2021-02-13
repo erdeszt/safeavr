@@ -1,3 +1,4 @@
+* Setup CI
 * USART
 * real timer, dummy doesn't work in simulation tracing
 * Cleanup warnings in tests
