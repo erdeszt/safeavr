@@ -5,7 +5,11 @@ ROOT=".."
 
 pushd check
 
-for filename in ${ROOT}/src/*.c; do
+for filename in ${ROOT}/src/core/*.c; do
+  cppcheck ${OPTS} ${filename}
+done
+
+for filename in ${ROOT}/src/hal/*.c; do
   cppcheck ${OPTS} ${filename}
 done
 
