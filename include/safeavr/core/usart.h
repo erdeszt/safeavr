@@ -1,6 +1,39 @@
-#include "safeavr/assert.h"
-#include "safeavr/defs.h"
-#include "safeavr/usart.h"
+#ifndef SAFEAVR_CORE_USART_H
+#define SAFEAVR_CORE_USART_H
+
+#include "safeavr/core/types.h"
+
+/*
+ * 9-bit mode not supported
+ */
+enum usart_character_size {
+    USART_CHARACTER_SIZE_5 = 0,
+    USART_CHARACTER_SIZE_6 = 1,
+    USART_CHARACTER_SIZE_7 = 2,
+    USART_CHARACTER_SIZE_8 = 3,
+};
+
+enum usart_clock_polarity {
+    USART_CLOCK_POLARITY_TX_RISE_RX_FALL = 0,
+    USART_CLOCK_POLARITY_TX_FALL_RX_RISE = 1,
+};
+
+enum usart_parity_bit {
+    USART_PARITY_BIT_NO = 0,
+    USART_PARITY_BIT_EVEN = 2,
+    USART_PARITY_BIT_ODD = 3,
+};
+
+enum usart_stop_bits {
+    USART_STOP_BITS_1 = 0,
+    USART_STOP_BITS_2 = 1,
+};
+
+enum usart_mode {
+    USART_MODE_ASYNC = 0,
+    USART_MODE_SYNC = 1,
+    USART_MODE_MASTER_SPI = 3,
+};
 
 struct usart_control_def_a {
     volatile u8 multi_processor_mode : 1;
@@ -42,33 +75,6 @@ struct usart_control {
     /* 0xC6 */ volatile u8 data : 8;
 };
 
-struct usart_control *usart0 = (struct usart_control *)0xC0;
+extern struct usart_control *usart0;
 
-void usart_init(const struct usart_init_config *config)
-{
-    assert(config->baud_rate > 0);
-
-    // UBRR0H = ((u16)baud_rate_register_value) >> 8u;
-    // UBRR0L = ((u16)baud_rate_register_value) & 0xffu;
-    usart0->baud_high = 0;
-    usart0->baud_low = 103;
-
-    usart0->control_b.tx_enable = 1;
-    usart0->control_c.character_size = USART_CHARACTER_SIZE_8;
-}
-
-void usart_send(const char *message)
-{
-    // TODO: Abstraction for test:
-    // TODO: Static limits on the loops
-    for (int i = 0; message[i]; i++) {
-        // TODO: Check for UDRE0
-        // while (!(UCSR0A & (1u << UDRE0))) ;
-
-        usart0->data = message[i];
-
-        for (i16 j = 0; j < 10000; j++) {
-            __asm__ __volatile__("nop");
-        }
-    }
-}
+#endif /* SAFEAVR_CORE_USART_H */

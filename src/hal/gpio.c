@@ -1,6 +1,9 @@
-#include "safeavr/assert.h"
-#include "safeavr/defs.h"
-#include "safeavr/gpio.h"
+#include "safeavr/core/assert.h"
+#include "safeavr/core/bits.h"
+#include "safeavr/core/defs.h"
+#include "safeavr/core/gpio.h"
+#include "safeavr/core/types.h"
+#include "safeavr/hal/gpio.h"
 
 static inline boolean is_pin_mode_output(const struct gpio_definition *gpio,
                                          const enum gpio_pin pin)

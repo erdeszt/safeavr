@@ -7,7 +7,7 @@ include(../Flags.cmake)
 enable_testing()
 
 # SafeAVR library with mocks
-add_library(safeavr_gpio_mocked ../src/gpio.c ../src/assert.c gpio_register_mocks.cpp)
+add_library(safeavr_gpio_mocked ../src/hal/gpio.c ../src/core/assert.c gpio_register_mocks.cpp)
 set_target_properties(safeavr_gpio_mocked PROPERTIES COMPILE_FLAGS ${C_WARNING_FLAGS})
 target_include_directories(safeavr_gpio_mocked PUBLIC ../include)
 set_property(TARGET safeavr_gpio_mocked PROPERTY CXX_STANDARD 17)

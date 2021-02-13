@@ -1,5 +1,5 @@
-#include "safeavr/assert.h"
-#include "safeavr/defs.h"
+#include "safeavr/core/assert.h"
+#include "safeavr/core/defs.h"
 
 #ifndef NDEBUG
 void assert(boolean condition)

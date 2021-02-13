@@ -1,5 +1,5 @@
 #include "safeavr_config.h"
-#include <safeavr.h>
+#include <safeavr/hal.h>
 #include <CppUTest/TestHarness.h>
 #include <CppUTest/CommandLineTestRunner.h>
 #include <vector>
