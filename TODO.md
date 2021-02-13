@@ -31,3 +31,5 @@
   * Only fixed baud rates
   * 16Mhz clock assumed
   * Double speed mode not supported
+* Check if it's possible to cmake without avr-libc
+  * Try: https://stackoverflow.com/a/53635241/1278218
