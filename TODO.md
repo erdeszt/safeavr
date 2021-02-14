@@ -7,6 +7,7 @@
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
 * github flow with tests
+  * werror on github
 * Add build/test/dependencies instructions
 * Cleanup simulation
   * cli arg for target file and mode(debug, run)

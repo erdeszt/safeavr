@@ -17,6 +17,7 @@
 
 * `gcc-avr`
 * `binutils-avr`
+* `avr-libc`
 * `cmake`
 * [Optional]`cppcheck`
 * [Optional]`ctags`
