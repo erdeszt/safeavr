@@ -9,7 +9,7 @@ int main(void)
     initialize();
 
     while (TRUE) {
-        usart_send("Hello 0\n");
+        usart_send("Hello 1\n");
         dummy_delay_one_second();
     }
 
