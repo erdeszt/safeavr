@@ -10,6 +10,7 @@
 
 * GPIO
 * USART
+* Timer
 
 ## Build:
 
@@ -20,5 +21,6 @@
 * `avr-libc`
 * `cmake`
 * [Optional]`cppcheck`
+* [Optional]`cpputest`
 * [Optional]`ctags`
 
