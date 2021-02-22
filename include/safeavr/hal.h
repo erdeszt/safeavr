@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-#if SAFEAVR_FEATURE_GPIO == 1
+#if defined(SAFEAVR_FEATURE_GPIO) && SAFEAVR_FEATURE_GPIO == 1
 #include "safeavr/hal/gpio.h"
 #endif
 
-#if SAFEAVR_FEATURE_USART == 1
+#if defined(SAFEAVR_FEATURE_USART) && SAFEAVR_FEATURE_USART == 1
 #include "safeavr/hal/usart.h"
 #endif
 

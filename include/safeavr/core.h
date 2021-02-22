@@ -15,11 +15,11 @@ extern "C" {
 #include "safeavr/core/interrupts.h"
 #include "safeavr/core/types.h"
 
-#if SAFEAVR_FEATURE_GPIO == 1
+#if defined(SAFEAVR_FEATURE_GPIO) && SAFEAVR_FEATURE_GPIO == 1
 #include "safeavr/core/gpio.h"
 #endif
 
-#if SAFEAVR_FEATURE_USART == 1
+#if defined(SAFEAVR_FEATURE_USART) && SAFEAVR_FEATURE_USART == 1
 #include "safeavr/core/usart.h"
 #endif
 
