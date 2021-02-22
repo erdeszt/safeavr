@@ -15,6 +15,10 @@ extern "C" {
 #include "safeavr/hal/usart.h"
 #endif
 
+#if defined(SAFEAVR_FEATURE_TIMER) && SAFEAVR_FEATURE_TIMER == 1
+#include "safeavr/hal/timer.h"
+#endif
+
 #ifdef __cplusplus
 }
 #endif

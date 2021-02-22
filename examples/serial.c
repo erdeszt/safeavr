@@ -2,7 +2,6 @@
 #include <safeavr/hal.h>
 
 void initialize(void);
-void dummy_delay_one_second(void);
 
 int main(void)
 {
@@ -10,7 +9,7 @@ int main(void)
 
     while (TRUE) {
         usart_send("Hello 1\n");
-        dummy_delay_one_second();
+        timer_delay_ms(1000);
     }
 
     return 0;
@@ -29,13 +28,8 @@ void initialize(void)
     };
 
     usart_init(&usart_config);
-}
 
-void dummy_delay_one_second(void)
-{
-    for (u32 i = 0; i < 1200000UL; i++) {
-        NOP();
-    }
+    timer_init();
 }
 
 void panic(void)

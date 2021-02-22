@@ -2,7 +2,7 @@
 #include <safeavr/hal.h>
 
 void initialize(void);
-void dummy_delay_one_second(void);
+void delay_one_second(void);
 
 int main(void)
 {
@@ -10,9 +10,9 @@ int main(void)
 
     while (TRUE) {
         gpio_write(GPIOB, PIN0, GPIO_HIGH);
-        dummy_delay_one_second();
+        timer_delay_ms(1000);
         gpio_write(GPIOB, PIN0, GPIO_LOW);
-        dummy_delay_one_second();
+        timer_delay_ms(1000);
     }
 
     return 0;
@@ -20,16 +20,11 @@ int main(void)
 
 void initialize(void)
 {
-    struct gpio_init_config d9 = { .mode = GPIO_OUTPUT, .pin = PIN0 };
+    struct gpio_init_config d8 = { .mode = GPIO_OUTPUT, .pin = PIN0 };
 
-    gpio_init(GPIOB, &d9);
-}
+    gpio_init(GPIOB, &d8);
 
-void dummy_delay_one_second(void)
-{
-    for (u32 i = 0; i < 1200000UL; i++) {
-        NOP();
-    }
+    timer_init();
 }
 
 void panic(void)

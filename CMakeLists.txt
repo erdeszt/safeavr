@@ -14,8 +14,8 @@ add_subdirectory(src)
 
 add_avr_executable(blink ${DEVICE} examples/blink.c)
 target_include_directories(blink.elf PUBLIC include)
-target_link_libraries(blink.elf safeavr_hal_gpio safeavr_hal_usart)
+target_link_libraries(blink.elf safeavr_hal_gpio safeavr_hal_usart safeavr_hal_timer)
 
 add_avr_executable(serial ${DEVICE} examples/serial.c)
 target_include_directories(serial.elf PUBLIC include)
-target_link_libraries(serial.elf safeavr_hal_gpio safeavr_hal_usart)
+target_link_libraries(serial.elf safeavr_hal_gpio safeavr_hal_usart safeavr_hal_timer)
