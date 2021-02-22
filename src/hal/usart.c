@@ -28,15 +28,15 @@ void usart_init(const struct usart_init_config *config)
     usart0->control_c.clock_polarity = config->clock_polarity;
 }
 
-void usart_send(const char *message)
+enum usart_tx_result usart_send(const char *message)
 {
     u16 char_index = 0;
+    u16 wait_count = 0;
+    enum usart_tx_result result = USART_TX_SUCCESS;
 
     for (; (char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE) &&
            (message[char_index] != '\0');
          char_index++) {
-        u16 wait_count = 0;
-
         for (wait_count = 0; (usart0->control_a.data_register_empty == 0) &&
                              (wait_count < SAFEAVR_USART_TX_MAX_WAIT);
              wait_count++) {
@@ -44,7 +44,8 @@ void usart_send(const char *message)
         }
 
         if (wait_count >= SAFEAVR_USART_TX_MAX_WAIT) {
-            panic();
+            result = USART_TX_TIMEOUT;
+            break;
         }
 
         usart0->data = message[char_index];
@@ -53,4 +54,6 @@ void usart_send(const char *message)
     if (char_index >= SAFEAVR_USART_TX_MAX_STRING_SIZE) {
         panic();
     }
+
+    return result;
 }

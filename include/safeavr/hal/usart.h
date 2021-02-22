@@ -7,6 +7,11 @@ enum usart_baud_rate {
     USART_BAUD_RATE_9600 = 103,
 };
 
+enum usart_tx_result {
+    USART_TX_SUCCESS = 0,
+    USART_TX_TIMEOUT = 1,
+};
+
 /*
  * Assumed clock speed is 16Mhz
  */
@@ -26,6 +31,6 @@ extern const u16 SAFEAVR_USART_RX_MAX_WAIT;
 
 void usart_init(const struct usart_init_config *config);
 
-void usart_send(const char *message);
+enum usart_tx_result usart_send(const char *message);
 
 #endif /* SAFEAVR_HAL_USART_H */
