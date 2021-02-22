@@ -29,7 +29,7 @@ boolean timer_delay_ms(const u16 delay)
     boolean delays_successful = TRUE;
     u16 delay_count = 0;
 
-    while (delay_count < SAFEAVR_TIMER_MAX_DELAY && delay_count < delay) {
+    while ((delay_count < SAFEAVR_TIMER_MAX_DELAY) && (delay_count < delay)) {
         delays_successful = timer_delay_1ms();
         delay_count++;
     }
