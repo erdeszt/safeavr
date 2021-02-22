@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPTS="--enable=all --std=c99 --addon=misra --suppressions-list=suppressions.txt -I../include"
+OPTS="--enable=all --std=c99 --addon=misra.json --suppressions-list=suppressions.txt -I../include"
 ROOT=".."
 
 pushd check

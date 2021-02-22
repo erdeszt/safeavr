@@ -6,7 +6,9 @@
   * Only delay ms for now
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
-* github flow with tests
+* Improve github flow
+  * werror on github
+  * -fanalyzer gcc flag
 * Add build/test/dependencies instructions
 * Cleanup simulation
   * cli arg for target file and mode(debug, run)
@@ -31,3 +33,5 @@
   * Only fixed baud rates
   * 16Mhz clock assumed
   * Double speed mode not supported
+* Check if it's possible to cmake without avr-libc
+  * Try: https://stackoverflow.com/a/53635241/1278218
