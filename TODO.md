@@ -6,8 +6,9 @@
   * Only delay ms for now
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
-* github flow with tests
+* Improve github flow
   * werror on github
+  * -fanalyzer gcc flag
 * Add build/test/dependencies instructions
 * Cleanup simulation
   * cli arg for target file and mode(debug, run)
