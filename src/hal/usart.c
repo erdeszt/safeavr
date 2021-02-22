@@ -12,8 +12,10 @@ void usart_init(const struct usart_init_config *config)
     case USART_BAUD_RATE_9600:
         usart0->baud_high = 0;
         usart0->baud_low = 103;
+        break;
     default:
         panic();
+        break;
     }
 
     usart0->control_a.multi_processor_mode = (u8)config->multi_processor_mode;
@@ -31,12 +33,14 @@ void usart_init(const struct usart_init_config *config)
 void usart_send(const char *message)
 {
     u16 char_index = 0;
-    u16 wait_count = 0;
 
-    for (; message[char_index] && char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE;
+    for (; (char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE) &&
+           (message[char_index] != '\0');
          char_index++) {
-        for (wait_count = 0; usart0->control_a.data_register_empty == 0 &&
-                             wait_count < SAFEAVR_USART_TX_MAX_WAIT;
+        u16 wait_count = 0;
+
+        for (wait_count = 0; (usart0->control_a.data_register_empty == 0) &&
+                             (wait_count < SAFEAVR_USART_TX_MAX_WAIT);
              wait_count++) {
             NOP();
         }
