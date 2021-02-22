@@ -10,9 +10,9 @@ int main(void)
 
     while (TRUE) {
         gpio_write(GPIOB, PIN0, GPIO_HIGH);
-        timer_delay_ms(1000);
+        (void)timer_delay_ms(1000U);
         gpio_write(GPIOB, PIN0, GPIO_LOW);
-        timer_delay_ms(1000);
+        (void)timer_delay_ms(1000U);
     }
 
     return 0;

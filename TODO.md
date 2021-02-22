@@ -2,8 +2,6 @@
 * USART
   * RX
   * Tests
-* real timer, dummy doesn't work in simulation tracing
-  * Only delay ms for now
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
 * Improve github flow

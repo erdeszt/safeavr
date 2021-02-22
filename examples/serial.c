@@ -8,8 +8,8 @@ int main(void)
     initialize();
 
     while (TRUE) {
-        usart_send("Hello 1\n");
-        timer_delay_ms(1000);
+        (void)usart_send("Hello 1\n");
+        (void)timer_delay_ms(1000U);
     }
 
     return 0;

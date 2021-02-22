@@ -31,12 +31,13 @@ void usart_init(const struct usart_init_config *config)
 enum usart_tx_result usart_send(const char *message)
 {
     u16 char_index = 0;
-    u16 wait_count = 0;
     enum usart_tx_result result = USART_TX_SUCCESS;
 
     for (; (char_index < SAFEAVR_USART_TX_MAX_STRING_SIZE) &&
            (message[char_index] != '\0');
          char_index++) {
+        u16 wait_count = 0;
+
         for (wait_count = 0; (usart0->control_a.data_register_empty == 0) &&
                              (wait_count < SAFEAVR_USART_TX_MAX_WAIT);
              wait_count++) {
