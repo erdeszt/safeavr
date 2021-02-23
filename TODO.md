@@ -4,6 +4,7 @@
   * Tests
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
+* Add CppCheck as a git submodule
 * Improve github flow
   * werror on github
   * -fanalyzer gcc flag

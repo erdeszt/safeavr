@@ -2,7 +2,6 @@
 #include <safeavr/hal.h>
 
 void initialize(void);
-void delay_one_second(void);
 
 int main(void)
 {

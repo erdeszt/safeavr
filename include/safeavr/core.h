@@ -27,6 +27,10 @@ extern "C" {
 #include "safeavr/core/timer.h"
 #endif
 
+#if defined(SAFEAVR_FEATURE_ADC) && SAFEAVR_FEATURE_ADC == 1
+#include "safeavr/core/adc.h"
+#endif
+
 #ifdef __cplusplus
 }
 #endif
