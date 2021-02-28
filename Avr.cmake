@@ -10,8 +10,7 @@ if(NOT DEFINED ROOT_DIR)
     message(FATAL_ERROR "ROOT_DIR is not defined")
 endif()
 
-include(${ROOT_DIR}/Flags.cmake)
-
+set(C_WARNING_FLAGS "-Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -pedantic")
 set(C_GENERAL_FLAGS "-std=c99 -nostdinc -funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -fno-common")
 set(C_OPTIMIZATION_FLAGS "-Os")
 

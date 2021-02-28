@@ -4,21 +4,21 @@
   * Tests
 * Cleanup warnings in tests
 * Add CppUTest as a git submodule
-* Add CppCheck as a git submodule
 * Improve github flow
   * werror on github
   * -fanalyzer gcc flag
+  * Fixing cppcheck
 * Add build/test/dependencies instructions
+* Finish requirements for adc, timer, usart
 * Cleanup simulation
   * cli arg for target file and mode(debug, run)
 * Refine cppcheck unused warning supression for library functions
 * MisraC compliance
   * Create compliance matrix
   * Document deviations for IO mapped registers (11.4)
-  * Document deviation from single point of exit:
+  * Document deviation from single point of exit(??? not used atm):
     * 15.1 for functions with resource allocation
     * 15.5 for functions with no resource allocation
-  * Figure out how to suppress deviations in tool
 * Integration tests with simavr
 * Complete cmake setup for the avr build
   * Move check to cmake
