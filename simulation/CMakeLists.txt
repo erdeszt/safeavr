@@ -37,8 +37,6 @@ add_library(simavr
 target_include_directories(simavr PUBLIC ${SIMAVR_ROOT} ${SIMAVR_ROOT}/cores ${SIMAVR_SRC})
 target_link_libraries(simavr elf)
 
-# GPIO test suite executable
-
 add_executable(simulation main.c)
 target_include_directories(simulation PUBLIC ../vendor/simavr/simavr/sim)
 target_link_libraries(simulation simavr)

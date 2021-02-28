@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPTS="--enable=all --std=c99 --addon=cppcheck.json --suppressions-list=cppcheck.suppressions -Iinclude"
+OPTS="--enable=all --std=c99 --addon=scripts/cppcheck.json --suppressions-list=scripts/cppcheck.suppressions -Iinclude"
 
 for filename in ./src/core/*.c; do
   cppcheck ${OPTS} ${filename}
