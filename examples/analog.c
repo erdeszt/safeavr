@@ -9,8 +9,8 @@ int main(void)
 
     while (TRUE) {
         adc->control_a.start_conversion = TRUE;
-        while (adc->control_a.start_conversion)
-            ;
+        while (adc->control_a.start_conversion == TRUE) {
+        }
 
         u16 value = adc->adc;
 

@@ -1,5 +1,5 @@
 {
-  "script": "misra.py",
+  "script": "vendor/cppcheck/addons/misra.py",
   "args": [
     "--suppress-rules 11.4"
   ]
