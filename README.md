@@ -8,6 +8,8 @@ The `core` part is a replacement for [avr-libc](http://www.nongnu.org/avr-libc/)
 
 The `hal` part is an abstraction layer built on top of `core` that hides some of the details of the underlying hardware and makes it easier to write portable code.
 
+It also comes with a reusable AVR `CMake` helper (`Avr.cmake`), based on [https://github.com/mkleemann/cmake-avr](https://github.com/mkleemann/cmake-avr) and an [https://www.nongnu.org/avrdude/](https://www.nongnu.org/avrdude/) config.
+ 
 ## Supported MCUs:
 
 * ATMega328P

@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(SafeAVRSimulation C)
 
-include(../Flags.cmake)
-
 set(SIMAVR_ROOT "../vendor/simavr/simavr")
 set(SIMAVR_SRC ${SIMAVR_ROOT}/sim)
 
