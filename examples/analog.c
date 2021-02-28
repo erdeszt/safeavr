@@ -8,8 +8,8 @@ int main(void)
     initialize();
 
     while (TRUE) {
-        adc->control_a |= (1 << 6);
-        while (IS_BIT_SET(adc->control_a, 6))
+        adc->control_a.start_conversion = TRUE;
+        while (adc->control_a.start_conversion)
             ;
 
         u16 value = adc->adc;
@@ -23,6 +23,7 @@ int main(void)
 void initialize(void)
 {
     adc->multiplexer = 64; // REFS=01
-    adc->control_a = 131; // Prescale: 8, enable
+    adc->control_a.prescaler = ADC_PRESCALER_8;
+    adc->control_a.enable = TRUE;
 }
 

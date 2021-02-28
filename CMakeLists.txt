@@ -23,4 +23,4 @@ target_link_libraries(serial.elf safeavr_hal_gpio safeavr_hal_usart safeavr_hal_
 add_avr_executable(analog ${DEVICE} examples/analog.c)
 target_include_directories(analog.elf PUBLIC include)
 # TODO: USE ADC HAL
-target_link_libraries(analog.elf safeavr_hal_gpio safeavr_hal_usart safeavr_hal_timer, safeavr_core_adc)
+target_link_libraries(analog.elf safeavr_hal_gpio safeavr_hal_usart safeavr_hal_timer safeavr_core_adc)

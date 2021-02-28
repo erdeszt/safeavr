@@ -34,6 +34,3 @@ target_include_directories(safeavr_hal_timer PUBLIC ${ROOT_DIR}/include)
 # ADC
 add_avr_library(safeavr_core_adc core/adc.c)
 target_include_directories(safeavr_core_adc PUBLIC ${ROOT_DIR}/include)
-
-# add_avr_library(safeavr_hal_timer core/assert.c core/timer.c hal/timer.c)
-# target_include_directories(safeavr_hal_timer PUBLIC ${ROOT_DIR}/include)
