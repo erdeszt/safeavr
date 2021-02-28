@@ -16,6 +16,7 @@ int main(void)
 {
     avr_t *avr = NULL;
     avr_vcd_t vcd_file;
+    /* TODO: Use args */
     char should_debug_input[5] = { 0 };
 
     printf("Should debug? ");
