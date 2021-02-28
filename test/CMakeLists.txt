@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
+
 project(SafeAVRTest C CXX)
 
-include(../Flags.cmake)
-
 enable_testing()
+
+set(C_WARNING_FLAGS "-Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -pedantic")
 
 # SafeAVR library with mocks
 add_library(safeavr_gpio_mocked ../src/hal/gpio.c ../src/core/assert.c gpio_register_mocks.cpp)

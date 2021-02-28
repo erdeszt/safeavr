@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(SafeAVRSimulation C)
 
-include(../Flags.cmake)
-
 set(SIMAVR_ROOT "../vendor/simavr/simavr")
 set(SIMAVR_SRC ${SIMAVR_ROOT}/sim)
 
@@ -36,8 +34,6 @@ add_library(simavr
 )
 target_include_directories(simavr PUBLIC ${SIMAVR_ROOT} ${SIMAVR_ROOT}/cores ${SIMAVR_SRC})
 target_link_libraries(simavr elf)
-
-# GPIO test suite executable
 
 add_executable(simulation main.c)
 target_include_directories(simulation PUBLIC ../vendor/simavr/simavr/sim)

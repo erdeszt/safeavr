@@ -1,20 +1,15 @@
 #!/bin/bash
 
-OPTS="--enable=all --std=c99 --addon=misra.json --suppressions-list=suppressions.txt -I../include"
-ROOT=".."
+OPTS="--enable=all --std=c99 --addon=scripts/cppcheck.json --suppressions-list=scripts/cppcheck.suppressions -Iinclude"
 
-pushd check
-
-for filename in ${ROOT}/src/core/*.c; do
+for filename in ./src/core/*.c; do
   cppcheck ${OPTS} ${filename}
 done
 
-for filename in ${ROOT}/src/hal/*.c; do
+for filename in ./src/hal/*.c; do
   cppcheck ${OPTS} ${filename}
 done
 
-for filename in ${ROOT}/examples/*.c; do
+for filename in ./examples/*.c; do
   cppcheck ${OPTS} ${filename}
 done
-
-popd

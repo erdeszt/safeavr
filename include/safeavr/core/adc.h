@@ -20,26 +20,26 @@ enum adc_auto_trigger_source {
 };
 
 struct adc_control_a {
-    enum adc_prescaler prescaler : 3;
-    boolean interrupt_enable : 1;
-    boolean interrupt_flag : 1;
-    boolean auto_trigger : 1;
-    boolean start_conversion : 1;
-    boolean enable : 1;
+    volatile enum adc_prescaler prescaler : 3;
+    volatile boolean interrupt_enable : 1;
+    volatile boolean interrupt_flag : 1;
+    volatile boolean auto_trigger : 1;
+    volatile boolean start_conversion : 1;
+    volatile boolean enable : 1;
 };
 
 struct adc_control_b {
-    enum adc_auto_trigger_source auto_trigger_source : 3;
-    u8 unused_1 : 3;
-    boolean analog_comparator_multiplexer : 1;
-    u8 unused_2 : 1;
+    volatile enum adc_auto_trigger_source auto_trigger_source : 3;
+    volatile u8 unused_1 : 3;
+    volatile boolean analog_comparator_multiplexer : 1;
+    volatile u8 unused_2 : 1;
 };
 
 struct adc_registers {
-    u16 adc;
+    volatile u16 adc;
     struct adc_control_a control_a;
     struct adc_control_b control_b;
-    u8 multiplexer;
+    volatile u8 multiplexer;
 };
 
 extern struct adc_registers *adc;
